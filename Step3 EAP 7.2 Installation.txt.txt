@@ -1,0 +1,80 @@
+SET THE AZUL JDK 
+1. PATH 
+2. JAVA HOME 
+
+***** Note java_home is very important to set; use the edit button if the java is not invoking.
+
+
+
+set ANT_HOME=C:\ANT
+set JAVA_HOME=C:\Program Files\Zulu\zulu-14
+set JAVA_HOME=C:\Program Files\Zulu\zulu-14
+cd C:\Users\Yuvi\EAP-7.2.0
+
+USERNAME : Admin
+Pwd : admin
+
+
+AVOS Application USER: avosadmin
+pwd :avosadmin
+roles: abAdmin
+
+
+
+1.add a managementUser : jbossadmin
+  pwd :jbossadmin
+2. add a applicationUser :jbossadmin
+  pwd : jbossadmin
+  
+  
+3. install ant  for sip_ant to work.
+  
+
+
+
+STANDALONE.CONFIG
+
+set "JAVA_OPTS=-Xms2G -Xmx8G -XX:MetaspaceSize=1024M -XX:MaxMetaspaceSize=2048m -Djboss.as.management.blocking.timeout=5000"
+## Problems faced. 
+1. adding the role in the jboss 
+bad move on enabling the RBAC. Which somehow, it is impacting the maanagement pacg.e 
+
+
+2. reinstallated .
+3. added the new users .
+
+
+4. setting the some properties as mentioned in the documents.
+
+NOTE: jboss-cli runs only the server is up and running.
+
+5.Set the timeout.
+/subsystem=transactions:write-attribute(name=default-timeout,value=3600)
+
+
+
+6.Modify max-post-size=30000000 bytes(30MB) from default 10MB for both http-listener and https-listener tags in standalone-full.xml:
+
+<http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true" max-post-size="30000000"/>
+<https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"  max-post-size="30000000"/>​
+
+
+
+
+
+scritps:
+
+set JAVA_HOME=C:\Program Files\Zulu\zulu-14
+cd C:\Users\Yuvi\JBOSS_EAP_7.2\bin\
+jboss-cli.bat
+connect
+/subsystem=transactions:write-attribute(name=default-timeout,value=3600)
+
+standard-sockets/socket-binding
+## made this property manually.
+/subsystem=undertow/server=default-server/<listener type>=<listener name>/:write-
+attribute(name=max-post-size,value=20000000) ##
+
+## remote socket 
+/socket-binding-group=standard-sockets/socket-binding=remoting:add(port=4447)
+/subsystem=remoting/connector=remoting-connector:add(socket-binding=remoting)

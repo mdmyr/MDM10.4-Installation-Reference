@@ -1,0 +1,54 @@
+Troubleshoot the issue :
+
+SIP-09131: General Decryption failure and [ERROR] com.delos.util.StringUtil: Unable to
+decrypt
+
+1. do in cmd
+C:\infamdm\hub\server\lib>java -classpath siperian-api.jar;siperian-common.jar;siperian-server.jar com.delos.util.PublicKeyBasedEncryptionHelper admin C:\infamdm\hub\serve
+
+
+2. update the cmx_system : respective user 
+
+3. run postInstallSetup.bat -Ddatabase.password=!!cmx!!
+  postInstallSetup.bat -Ddatabase.password="!!cmx!!"  -Davos.username="avosadmin" -Davos.password="avosadmin" -Davos.jdbc.database.password="avos" -Davos.jdbc.database.username="avos"
+  
+4. take the key generated and udpate tin c_repos_databse where user name='cmx_system' and b
+
+  
+  
+4. >sip_ant.bat hash_users_passwords
+5. sip_ant.bat add_application_users
+
+6. bounce and check the server 
+7. if needed run the postInstallSetup/
+
+  
+  
+  
+  
+ Snapshot of the log, it shows the paths of the variable.
+  /****/
+  
+  
+C:\infamdm\hub\server>postInstallSetup.bat -Ddatabase.password="!!cmx!!"  -Davos.username="avosadmin" -Davos.password="avosadmin" -Davos.jdbc.database.password="avos" -Davos.jdbc.database.username="avos"
+        1 file(s) moved.
+        1 file(s) moved.
+        1 file(s) moved.
+------------------------------------------------------------------
+Current folder : C:\infamdm\hub\server\bin\
+Current script : sip_ant.bat
+Parameters : postinstallsetup -logger org.apache.tools.ant.NoBannerLogger -logfile ../logs/postInstallSetup.log -Ddatabase.password="!!cmx!!"  -Davos.username="avosadmin" -Davos.password="avosadmin" -Davos.jdbc.database.password="avos" -Davos.jdbc.database.username="avos"
+JBoss Home : C:\Users\Yuvi\EAP-7.1.0
+Siperian Home : C:\infamdm\hub\server
+Java Home : C:\Program Files\Zulu\zulu-8
+Classpath : C:\infamdm\hub\server\lib\hashing\bcprov-jdk15on-1.54.jar;C:\infamdm\hub\server\lib\ant.jar;C:\infamdm\hub\server\lib\xml-apis.jar;C:\infamdm\hub\server\lib\xercesImpl.jar;C:\infamdm\hub\server\lib\log4j-1.2.16.jar;C:\Users\Yuvi\EAP-7.1.0\bin\client\jboss-cli-client.jar;C:\Users\Yuvi\EAP-7.1.0\bin\client\jboss-client.jar;C:\Program Files\Zulu\zulu-8\lib\rt.jar;C:\Program Files\Zulu\zulu-8\lib\i18n.jar;C:\infamdm\hub\server\lib\siperian-common.jar;C:\infamdm\hub\server\lib\ant-apache-log4j.jar;
+------------------------------------------------------------------
+
+C:\infamdm\hub\server\bin>"C:\Program Files\Zulu\zulu-8\bin\java"  -Xms128m -Xmx2048m -XX:MaxPermSize=256m -classpath "C:\infamdm\hub\server\lib\hashing\bcprov-jdk15on-1.54.jar;C:\infamdm\hub\server\lib\ant.jar;C:\infamdm\hub\server\lib\xml-apis.jar;C:\infamdm\hub\server\lib\xercesImpl.jar;C:\infamdm\hub\server\lib\log4j-1.2.16.jar;C:\Users\Yuvi\EAP-7.1.0\bin\client\jboss-cli-client.jar;C:\Users\Yuvi\EAP-7.1.0\bin\client\jboss-client.jar;C:\Program Files\Zulu\zulu-8\lib\rt.jar;C:\Program Files\Zulu\zulu-8\lib\i18n.jar;C:\infamdm\hub\server\lib\siperian-common.jar;C:\infamdm\hub\server\lib\ant-apache-log4j.jar;;C:\infamdm\hub\server\lib\ant-launcher.jar;C:\infamdm\hub\server\lib\commons-validator-1.4.0.jar;C:\infamdm\hub\server\lib\siperian-common.jar;C:\infamdm\hub\server\lib\ojdbc7.jar;C:\infamdm\hub\server\lib\db2jcc.jar;C:\infamdm\hub\server\lib\mssql-jdbc-7.2.2.jre8.jar;C:\infamdm\hub\server\lib\db2jcc_license_cu.jar" org.apache.tools.ant.Main postinstallsetup -logger org.apache.tools.ant.NoBannerLogger -logfile ../logs/postInstallSetup.log -Ddatabase.password="!!cmx!!"  -Davos.username="avosadmin" -Davos.password="avosadmin" -Davos.jdbc.database.password="avos" -Davos.jdbc.database.username="avos" -Dlog4j.configuration=C:\infamdm\hub\server\lib\log4j.properties
+OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
+Buildfile: C:\infamdm\hub\server\bin\build.xml
+SCRIPT FINISHED
+
+*** DEPLOYMENT SUCCESSFUL ***
+
+*** View execution results in log file :  C:\infamdm\hub\server\logs/postInstallSetup.log ***
